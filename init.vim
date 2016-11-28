@@ -29,8 +29,8 @@ noremap Y y$
 :let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
 " Backup and Swap-Directories
-set directory=~/.vim/tmp/swap
-set backupdir=~/.vim/tmp/backup
+set directory=~/.nvim/tmp/swap
+set backupdir=~/.nvim/tmp/backup
 " persistent undo:
 if(version >= 703)
   set undofile
