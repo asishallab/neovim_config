@@ -1,0 +1,94 @@
+snippet # "generate comment block"
+#' $1
+#'
+#' @param $2
+#'
+#' @return $3
+#' @export
+endsnippet
+
+snippet _ "assign" i
+ <- 
+endsnippet
+
+snippet [[ "generate closing double square brackets" i
+[[ $1 ]]
+endsnippet
+
+snippet te "Generate a test block"
+# Test ${1:method}
+print("Testing $1(...)")
+res.$1 <- $1( $2 )
+exp.$1 <- $3
+check${4:Equals}( res.$1, exp.$1 ) $0
+endsnippet
+
+snippet f "Function stub"
+$1 <- function( $2 ) {
+  $0
+}
+endsnippet
+
+snippet p "print"
+print( $1 )
+endsnippet
+
+snippet for "for loop" !b
+for ( $1 in $2 ) {
+  $0
+}
+endsnippet
+
+snippet i "if block" i
+if ( $1 ) {
+  $0
+}
+endsnippet
+
+snippet e "else block" i
+ else {
+  $0
+}
+endsnippet
+
+snippet ei "else-if block" i
+ else if ( $1 ) {
+  $0
+}
+endsnippet
+
+snippet ? "tertiary operator (if else)" i
+if ( $1 ) $2 else $3
+endsnippet
+
+snippet % "brew - R expression" i
+<% $1 %>$0
+endsnippet
+
+snippet = "brew - print result of R expression" i
+<%= $1 %>$0
+endsnippet
+
+snippet #p "Roxygen2 Parameter comment" b
+#' @param $0
+endsnippet
+
+snippet inp "Generates a variable called 'input.args' holding the trailing command line arguments passed to an R-script" i
+input.args <- commandArgs(trailingOnly=TRUE)
+endsnippet
+
+snippet m "Print out a message to the user" b
+message("$1")$0
+endsnippet
+
+snippet usa "Print out USAGE of script to the user" b
+message("USAGE: Rscript path/2/$1")$0
+endsnippet
+
+snippet F "FALSE" i
+FALSE$0
+endsnippet
+
+snippet T "TRUE" i
+TRUE$0
+endsnippet
