@@ -13,7 +13,10 @@ Plug 'vim-syntastic/syntastic'
 Plug 'maxbrunsfeld/vim-yankstack'
 Plug 'jpalardy/vim-slime'
 Plug 'altercation/vim-colors-solarized'
+Plug 'jelera/vim-javascript-syntax'
 Plug 'nanotech/jellybeans.vim'
+Plug 'jalvesaq/Nvim-R'
+Plug 'derekwyatt/vim-scala'
 " Group dependencies, vim-snippets depends on ultisnips
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'vim-scripts/DfrankUtil' | Plug 'vim-scripts/vimprj'
@@ -39,7 +42,7 @@ endif
 
 " General settings
 let mapleader = "\\"
-let maplocalleader = "+"
+let maplocalleader = "-"
 set wildmenu
 set wildmode=full
 set ls=2
@@ -91,10 +94,20 @@ else
   endif
 endif
 
+" Yankstack:
+nmap <Leader>p <Plug>yankstack_substitute_older_paste
+nmap <Leader>P <Plug>yankstack_substitute_newer_paste
 
 " Wrapping:
 command! -nargs=* Wrap set wrap linebreak nolist
 " set showbreak=…
+
+" vim-slime
+let g:slime_target = "tmux"
+let g:slime_paste_file = "$HOME/.slime_paste"
+let g:slime_default_config = {"socket_name": "default", "target_pane": "2"}
+" Format R code:
+map <Leader>r :%!$R -e 'require(formatR); tidy_source(source="%");'<CR>
 
 " Surround for eruby:
 " autocmd FileType eruby let b:surround_37 = "<% \r %>"
@@ -108,6 +121,9 @@ com Sd set spell spelllang=de
 " Ctrl-Z in INSERT mode will correct last misspelled word before current
 " cursor position:
 inoremap <C-z> <Esc>[s1z=gi
+
+" Format Javascript Code-File:
+nmap <Leader>j :%!~/.npm-packages/bin/js-beautify %<CR>
 
 " rails-vim and ctags
 " ctag the RVM-Environment and write those tags into ./tmp/rvm_env_tags
@@ -259,6 +275,7 @@ set history=1000	" keep 1000 lines of command line history
 set ruler		" show the cursor position all the time
 set showcmd		" display incomplete commands
 set incsearch		" do incremental searching
+set nohlsearch " No highlighting of search terms
 
 " For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
 " let &guioptions = substitute(&guioptions, "t", "", "g")
