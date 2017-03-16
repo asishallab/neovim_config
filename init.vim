@@ -123,7 +123,7 @@ com Sd set spell spelllang=de
 inoremap <C-z> <Esc>[s1z=gi
 
 " Format Javascript Code-File:
-nmap <Leader>j :%!~/.npm-packages/bin/js-beautify %<CR>
+autocmd FileType javascript setlocal equalprg=js-beautify\ --stdin\ -s\ 2\ -w\ 80
 
 " rails-vim and ctags
 " ctag the RVM-Environment and write those tags into ./tmp/rvm_env_tags
@@ -195,10 +195,10 @@ let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=1
 
 " CtrlP:
-map <Leader>, :CtrlP<CR>
-map <Leader>. :CtrlPBuffer<CR>
-map <Leader>- :CtrlPBufTag<CR>
-map <Leader># :CtrlPTag<CR>
+map <Leader>\ :CtrlP<CR>
+map <Leader>] :CtrlPBuffer<CR>
+map <Leader>, :CtrlPBufTag<CR>
+map <Leader>. :CtrlPTag<CR>
 let g:ctrlp_match_window_bottom=0
 let g:ctrlp_match_window_reversed=0
 let g:ctrlp_mruf_last_entered=1
