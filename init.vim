@@ -106,8 +106,6 @@ command! -nargs=* Wrap set wrap linebreak nolist
 let g:slime_target = "tmux"
 let g:slime_paste_file = "$HOME/.slime_paste"
 let g:slime_default_config = {"socket_name": "default", "target_pane": "2"}
-" Format R code:
-map <Leader>r :%!$R -e 'require(formatR); tidy_source(source="%");'<CR>
 
 " Surround for eruby:
 " autocmd FileType eruby let b:surround_37 = "<% \r %>"
@@ -124,6 +122,11 @@ inoremap <C-z> <Esc>[s1z=gi
 
 " Format Javascript Code-File:
 autocmd FileType javascript setlocal equalprg=js-beautify\ --stdin\ -s\ 2\ -w\ 80
+augroup filetypedetect
+  " associate *.ejs with javascript filetype
+  au BufRead,BufNewFile *.ejs setfiletype javascript
+  au BufRead,BufNewFile *.vue setfiletype javascript
+augroup END
 
 " rails-vim and ctags
 " ctag the RVM-Environment and write those tags into ./tmp/rvm_env_tags
