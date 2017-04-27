@@ -206,6 +206,7 @@ let g:ctrlp_match_window_bottom=0
 let g:ctrlp_match_window_reversed=0
 let g:ctrlp_mruf_last_entered=1
 let g:ctrlp_open_new_file = 'r'
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 " let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir', 'rtscript']
 
 " Define Function Quick-Fix-List-Do:
