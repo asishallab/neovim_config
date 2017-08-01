@@ -41,8 +41,8 @@ if(version >= 703)
 endif
 
 " General settings
-let mapleader = "\\"
-let maplocalleader = "-"
+let mapleader = "\<space>"
+let maplocalleader = "\\"
 set wildmenu
 set wildmode=full
 set ls=2
@@ -198,10 +198,10 @@ let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=1
 
 " CtrlP:
-map <Leader>\ :CtrlP<CR>
-map <Leader>] :CtrlPBuffer<CR>
-map <Leader>, :CtrlPBufTag<CR>
+map <Leader><space> :CtrlP<CR>
+map <Leader>, :CtrlPBuffer<CR>
 map <Leader>. :CtrlPTag<CR>
+map <Leader>\\ :CtrlPBufTag<CR>
 let g:ctrlp_match_window_bottom=0
 let g:ctrlp_match_window_reversed=0
 let g:ctrlp_mruf_last_entered=1

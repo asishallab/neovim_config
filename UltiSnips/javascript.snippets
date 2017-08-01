@@ -9,3 +9,16 @@ endsnippet
 snippet r "require a package" i
 const $1 = require('$2');$0
 endsnippet
+
+snippet fk "foreignKey definition for sequelize" i
+$1_id: {
+  type: Sequelize.INTEGER,
+  references: {
+    model: '$2',
+    key: 'id'
+  },
+  onUpdate: 'cascade',
+  onDelete: 'cascade'
+}$0
+endsnippet
+	
