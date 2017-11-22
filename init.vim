@@ -66,6 +66,9 @@ set cursorline
 set ignorecase
 set smartcase
 
+" Toggle NERDTree:
+nnoremap <Leader>n :NERDTreeToggle<CR>
+
 " Formatting:
 map Q gq
 "Format a paragraph:
