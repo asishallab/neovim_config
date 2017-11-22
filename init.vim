@@ -71,6 +71,10 @@ set smartcase
 " Toggle NERDTree:
 nnoremap <Leader>n :NERDTreeToggle<CR>
 
+" Close all Buffers except the current one:
+com! -nargs=0 BufOnly :%bd | e#
+
+
 " Formatting:
 map Q gq
 "Format a paragraph:
