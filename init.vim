@@ -28,8 +28,10 @@ call plug#end()
 " Make Y behave just like C and D:
 noremap Y y$
 
-" This makes the cursor a pipe in insert-mode, and a block in normal-mode:
-:let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+" See :help 'guicursor'
+:set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
+  \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
+  \,sm:block-blinkwait175-blinkoff150-blinkon175
 
 " Backup and Swap-Directories
 set directory=~/.nvim/tmp/swap
