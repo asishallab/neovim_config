@@ -97,7 +97,7 @@ if has("mac")
 else
   set gfn=Monospace\ 12
   if !has('gui_running')
-    colorscheme delek
+    colorscheme jellybeans
   else
     colorscheme jellybeans
   endif
