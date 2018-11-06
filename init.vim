@@ -7,26 +7,28 @@ filetype off
 " Vim-Plug
 call plug#begin('~/.nvim/plugged')
 Plug 'kien/ctrlp.vim'
+" Plug 'cloudhead/neovim-fuzzy'
 Plug 'sjl/gundo.vim'
-Plug 'hoxnox/indexer.vim'
-Plug 'vim-syntastic/syntastic'
 Plug 'maxbrunsfeld/vim-yankstack'
 Plug 'jpalardy/vim-slime'
+Plug 'jsfaint/gen_tags.vim'
+Plug 'neomake/neomake'
 Plug 'altercation/vim-colors-solarized'
-Plug 'jelera/vim-javascript-syntax'
 Plug 'nanotech/jellybeans.vim'
-Plug 'jalvesaq/Nvim-R'
-Plug 'derekwyatt/vim-scala'
-" Group dependencies, vim-snippets depends on ultisnips
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-Plug 'vim-scripts/DfrankUtil' | Plug 'vim-scripts/vimprj'
+Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/neosnippet-snippets'
 " On-demand loading
+Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
+Plug 'neoclide/tern-neovim', { 'for': 'javascript' }
+Plug 'jalvesaq/Nvim-R', { 'for': 'r' }
+Plug 'derekwyatt/vim-scala', { 'for': 'scala' }
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 " Add plugins to &runtimepath
 call plug#end()
 
 " Make Y behave just like C and D:
 noremap Y y$
+noremap U y$
 
 " See :help 'guicursor'
 ":set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
@@ -51,7 +53,7 @@ set backupdir=~/.nvim/tmp/backup
 " persistent undo:
 if(version >= 703)
   set undofile
-  set undodir=~/.vim/tmp/undo
+  set undodir=~/.nvim/tmp/undo
 endif
 
 " General settings
@@ -79,6 +81,12 @@ set cursorline
 "set autochdir " always switch to the current file directory
 set ignorecase
 set smartcase
+
+" Neosnippet
+imap <C-k> <Plug>(neosnippet_expand_or_jump)
+smap <C-k> <Plug>(neosnippet_expand_or_jump)
+xmap <C-k> <Plug>(neosnippet_expand_target)
+let g:neosnippet#snippets_directory = '~/.config/nvim/my_neosnippets'
 
 " Toggle NERDTree:
 nnoremap <Leader>n :NERDTreeToggle<CR>
