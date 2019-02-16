@@ -19,7 +19,7 @@ Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 " On-demand loading
 Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
-Plug 'neoclide/tern-neovim', { 'for': 'javascript' }
+"Plug 'neoclide/tern-neovim', { 'for': 'javascript' }
 Plug 'jalvesaq/Nvim-R', { 'for': 'r' }
 Plug 'derekwyatt/vim-scala', { 'for': 'scala' }
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
@@ -221,10 +221,6 @@ let tlist_r_settings = 'Splus;r:object/function'
 "set foldclose=
 "set foldnestmax=2
 "set fillchars=vert:\|,fold:\
-
-" Syntastic
-let g:syntastic_enable_signs=1
-let g:syntastic_auto_loc_list=1
 
 " CtrlP:
 map <Leader><space> :CtrlP<CR>
