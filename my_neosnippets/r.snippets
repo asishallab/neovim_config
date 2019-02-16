@@ -4,3 +4,14 @@ options word
   ${1:functionName} <- function(${2:arguments}) {
     ${3:body}
   }
+
+snippet #'
+options head
+  #' ${1:function_description}
+  #'
+  #' @return ${2:return_value}
+  #' @export
+
+snippet #p
+options head
+  #' @param ${1:name} - ${2:description}
