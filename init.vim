@@ -134,7 +134,7 @@ command! -nargs=* Wrap set wrap linebreak nolist
 " vim-slime
 let g:slime_target = "tmux"
 let g:slime_paste_file = "$HOME/.slime_paste"
-let g:slime_default_config = {"socket_name": "default", "target_pane": "2"}
+let g:slime_default_config = {"socket_name": "default", "target_pane": "1.2"}
 
 " Surround for eruby:
 " autocmd FileType eruby let b:surround_37 = "<% \r %>"
