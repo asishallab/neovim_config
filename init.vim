@@ -257,19 +257,6 @@ fun! QFDo(bang, command)
 endfunc 
 com! -nargs=1 -bang Qfdo :call QFDo(<bang>0,<q-args>)
 
-" Indexer enables automatic update of your exuberant-ctags generated
-" tags-file, every time you save any of your project's code-containing files.
-" Set it up to index any Ruby and RubyOnRails-Project in ~/projects:
-" --------------------- example ~/.indexer_files ----------------------- 
-" [PROJECTS_PARENT filter="**/*.rb **/*.erb **/*.rake"]
-" ~/projects
-" ------------------------------------------------------------------------------- 
-" autocmd Filetype ruby let g:indexer_ctagsCommandLineOptions='--langmap="ruby:+.rake.builder.rjs" --languages=-javascript'
-" autocmd Filetype java let g:indexer_ctagsCommandLineOptions='--language-force=java'
-"
-" Disable warning, if ctags does not match requirements:
-let g:indexer_disableCtagsWarning=1 
-
 " Enable JQuery-Syntax
 au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
 
