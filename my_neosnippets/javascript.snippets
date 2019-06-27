@@ -13,3 +13,21 @@ options word
 snippet me
 options head
   module.exports.${1:key} = ${2:value}
+
+snippet js
+options word
+  JSON.stringify(${1:object})
+
+snippet {
+options word
+  {
+    ${1:code}
+  }
+
+snippet (
+options word
+  (${1:code})
+
+snippet cl
+options word
+  console.log(${1:message})
