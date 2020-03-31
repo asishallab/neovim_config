@@ -6,7 +6,6 @@ filetype off
 
 " Vim-Plug
 call plug#begin('~/.nvim/plugged')
-" Plug 'neovim/nvim-lsp'
 Plug 'kien/ctrlp.vim'
 " Plug 'cloudhead/neovim-fuzzy'
 Plug 'sjl/gundo.vim'
@@ -15,11 +14,9 @@ Plug 'jpalardy/vim-slime'
 Plug 'jsfaint/gen_tags.vim'
 Plug 'vim-scripts/taglist.vim'
 "Plug 'majutsushi/tagbar'
-"Plug 'neomake/neomake'
-Plug 'dense-analysis/ale'
+Plug 'neomake/neomake'
 Plug 'altercation/vim-colors-solarized'
 Plug 'nanotech/jellybeans.vim'
-Plug 'morhetz/gruvbox'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 " On-demand loading
