@@ -6,7 +6,8 @@ filetype off
 
 " Vim-Plug
 call plug#begin('~/.nvim/plugged')
-" Plug 'neovim/nvim-lsp'
+Plug 'neovim/nvim-lspconfig'
+"Plug 'neovim/nvim-lsp'
 Plug 'kien/ctrlp.vim'
 " Plug 'cloudhead/neovim-fuzzy'
 Plug 'sjl/gundo.vim'
@@ -16,7 +17,7 @@ Plug 'jsfaint/gen_tags.vim'
 Plug 'vim-scripts/taglist.vim'
 "Plug 'majutsushi/tagbar'
 "Plug 'neomake/neomake'
-Plug 'dense-analysis/ale'
+"Plug 'dense-analysis/ale'
 Plug 'altercation/vim-colors-solarized'
 Plug 'nanotech/jellybeans.vim'
 Plug 'morhetz/gruvbox'
@@ -24,6 +25,8 @@ Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 " On-demand loading
 Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+"Plug 'racer-rust/vim-racer', { 'for': 'rust' }
 "Plug 'neoclide/tern-neovim', { 'for': 'javascript' }
 Plug 'jalvesaq/Nvim-R', { 'for': 'r' }
 Plug 'derekwyatt/vim-scala', { 'for': 'scala' }
@@ -87,6 +90,34 @@ set cursorline
 set ignorecase
 set smartcase
 
+" Helper to define LSP settings; see
+" https://rishabhrd.github.io/jekyll/update/2020/09/19/nvim_lsp_config.html
+nnoremap gD <cmd>lua vim.lsp.buf.declaration()<CR>
+nnoremap gd <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap K <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap gr <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap gs <cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap gi <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap gt <cmd>lua vim.lsp.buf.type_definition()<CR>
+nnoremap <leader>gw <cmd>lua vim.lsp.buf.document_symbol()<CR>
+nnoremap <leader>gW <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+nnoremap <leader>lh <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <leader>la <cmd>lua vim.lsp.buf.code_action()<CR>
+nnoremap <leader>le <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
+nnoremap <leader>lr <cmd>lua vim.lsp.buf.rename()<CR>
+nnoremap <leader>= <cmd>lua vim.lsp.buf.formatting()<CR>
+nnoremap <leader>li <cmd>lua vim.lsp.buf.incoming_calls()<CR>
+nnoremap <leader>lo <cmd>lua vim.lsp.buf.outgoing_calls()<CR>
+
+" Neovim Language Server Protocol (LSP):
+let g:lsp_diagnostics_echo_cursor = 1
+
+" setup rust_analyzer LSP (IDE features)
+lua require'lspconfig'.rust_analyzer.setup{}
+
+" Use LSP omni-completion in Rust files
+autocmd Filetype rust setlocal omnifunc=v:lua.vim.lsp.omnifunc
+
 " Neosnippet
 imap <C-k> <Plug>(neosnippet_expand_or_jump)
 smap <C-k> <Plug>(neosnippet_expand_or_jump)
@@ -147,6 +178,35 @@ let g:slime_default_config = {"socket_name": "default", "target_pane": "1.2"}
 " autocmd FileType eruby let b:surround_35 = "#{ \r }"
 " autocmd FileType ruby let b:surround_35 = "#{ \r }"
 
+" Rust Language Server
+" if executable('rls')
+"     au User lsp_setup call lsp#register_server({
+"         \ 'name': 'rls',
+"         \ 'cmd': {server_info->['rustup', 'run', 'stable', 'rls']},
+"         \ 'workspace_config': {'rust': {'clippy_preference': 'on'}},
+"         \ 'whitelist': ['rust'],
+"         \ })
+" endif
+
+" Rust (rust.vim)
+let g:rustfmt_autosave = 1
+
+"" rust-analyzer-language-server
+"let g:ale_linters = {'rust': ['analyzer']}
+
+"" Rust (racer)
+"let g:racer_experimental_completer = 1
+"let g:racer_insert_paren = 1
+"augroup Racer
+   "autocmd!
+   "autocmd FileType rust nmap <buffer> gd         <Plug>(rust-def)
+   "autocmd FileType rust nmap <buffer> gs         <Plug>(rust-def-split)
+   "autocmd FileType rust nmap <buffer> gx         <Plug>(rust-def-vertical)
+   "autocmd FileType rust nmap <buffer> gt         <Plug>(rust-def-tab)
+   "autocmd FileType rust nmap <buffer> <leader>gd <Plug>(rust-doc)
+   "autocmd FileType rust nmap <buffer> <leader>gD <Plug>(rust-doc-tab)
+"augroup END
+"
 " Spellcheck:
 com Se set spell spelllang=en
 com Sd set spell spelllang=de
