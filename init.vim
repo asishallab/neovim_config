@@ -7,7 +7,7 @@ filetype off
 " Vim-Plug
 call plug#begin('~/.nvim/plugged')
 Plug 'neovim/nvim-lspconfig'
-"Plug 'neovim/nvim-lsp'
+Plug 'anott03/nvim-lspinstall'
 Plug 'kien/ctrlp.vim'
 " Plug 'cloudhead/neovim-fuzzy'
 Plug 'sjl/gundo.vim'
@@ -16,8 +16,6 @@ Plug 'jpalardy/vim-slime'
 Plug 'jsfaint/gen_tags.vim'
 Plug 'vim-scripts/taglist.vim'
 "Plug 'majutsushi/tagbar'
-"Plug 'neomake/neomake'
-"Plug 'dense-analysis/ale'
 Plug 'altercation/vim-colors-solarized'
 Plug 'nanotech/jellybeans.vim'
 Plug 'morhetz/gruvbox'
@@ -26,8 +24,6 @@ Plug 'Shougo/neosnippet-snippets'
 " On-demand loading
 Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-"Plug 'racer-rust/vim-racer', { 'for': 'rust' }
-"Plug 'neoclide/tern-neovim', { 'for': 'javascript' }
 Plug 'jalvesaq/Nvim-R', { 'for': 'r' }
 Plug 'derekwyatt/vim-scala', { 'for': 'scala' }
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
