@@ -86,33 +86,64 @@ set cursorline
 set ignorecase
 set smartcase
 
-" Helper to define LSP settings; see
-" https://rishabhrd.github.io/jekyll/update/2020/09/19/nvim_lsp_config.html
-nnoremap gD <cmd>lua vim.lsp.buf.declaration()<CR>
-nnoremap gd <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap K <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap gr <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap gs <cmd>lua vim.lsp.buf.signature_help()<CR>
-nnoremap gi <cmd>lua vim.lsp.buf.implementation()<CR>
-nnoremap gt <cmd>lua vim.lsp.buf.type_definition()<CR>
-nnoremap <leader>gw <cmd>lua vim.lsp.buf.document_symbol()<CR>
-nnoremap <leader>gW <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
-nnoremap <leader>lh <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <leader>la <cmd>lua vim.lsp.buf.code_action()<CR>
-nnoremap <leader>le <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
-nnoremap <leader>lr <cmd>lua vim.lsp.buf.rename()<CR>
-nnoremap <leader>= <cmd>lua vim.lsp.buf.formatting()<CR>
-nnoremap <leader>li <cmd>lua vim.lsp.buf.incoming_calls()<CR>
-nnoremap <leader>lo <cmd>lua vim.lsp.buf.outgoing_calls()<CR>
+" Neovim LSP customizations; see:
+" https://github.com/neovim/nvim-lspconfig
+" (last visited 15th of February 2021)
+lua << EOF
+local nvim_lsp = require('lspconfig')
+local on_attach = function(client, bufnr)
+  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
-" Neovim Language Server Protocol (LSP):
-let g:lsp_diagnostics_echo_cursor = 1
+  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-" setup rust_analyzer LSP (IDE features)
-lua require'lspconfig'.rust_analyzer.setup{}
+  -- Mappings.
+  local opts = { noremap=true, silent=true }
+  buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+  buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+  buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+  buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
 
-" Use LSP omni-completion in Rust files
-autocmd Filetype rust setlocal omnifunc=v:lua.vim.lsp.omnifunc
+  -- Set some keybinds conditional on server capabilities
+  if client.resolved_capabilities.document_formatting then
+    buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+  elseif client.resolved_capabilities.document_range_formatting then
+    buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
+  end
+
+  -- Set autocommands conditional on server_capabilities
+  if client.resolved_capabilities.document_highlight then
+    vim.api.nvim_exec([[
+      hi LspReferenceRead cterm=bold ctermbg=red guibg=LightYellow
+      hi LspReferenceText cterm=bold ctermbg=red guibg=LightYellow
+      hi LspReferenceWrite cterm=bold ctermbg=red guibg=LightYellow
+      augroup lsp_document_highlight
+        autocmd! * <buffer>
+        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+      augroup END
+    ]], false)
+  end
+end
+
+-- Use a loop to conveniently both setup defined servers 
+-- and map buffer local keybindings when the language server attaches
+local servers = { "pyright", "rust_analyzer", "tsserver" }
+for _, lsp in ipairs(servers) do
+  nvim_lsp[lsp].setup { on_attach = on_attach }
+end
+EOF
 
 " Neosnippet
 imap <C-k> <Plug>(neosnippet_expand_or_jump)
