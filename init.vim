@@ -21,6 +21,14 @@ Plug 'nanotech/jellybeans.vim'
 Plug 'morhetz/gruvbox'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
+" Tim Pope
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-surround'
+" Colorschemes
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'logico/typewriter-vim'
+Plug 'ErichDonGubler/vim-sublime-monokai'
+Plug 'nanotech/jellybeans.vim'
 " On-demand loading
 Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
@@ -144,6 +152,11 @@ for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup { on_attach = on_attach }
 end
 EOF
+
+let g:LanguageClient_serverCommands = {
+      \ 'r': ['R', '--slave', '-e', 'languageserver::run()'],
+      \ }
+
 
 " Neosnippet
 imap <C-k> <Plug>(neosnippet_expand_or_jump)
