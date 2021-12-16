@@ -8,23 +8,27 @@ filetype off
 call plug#begin('~/.nvim/plugged')
 Plug 'neovim/nvim-lspconfig'
 Plug 'anott03/nvim-lspinstall'
-Plug 'kien/ctrlp.vim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+" Plug 'kien/ctrlp.vim'
 " Plug 'cloudhead/neovim-fuzzy'
-Plug 'sjl/gundo.vim'
+" Plug 'sjl/gundo.vim'
+Plug 'mbbill/undotree'
 Plug 'maxbrunsfeld/vim-yankstack'
 Plug 'jpalardy/vim-slime'
 Plug 'jsfaint/gen_tags.vim'
 Plug 'vim-scripts/taglist.vim'
 "Plug 'majutsushi/tagbar'
-Plug 'altercation/vim-colors-solarized'
-Plug 'nanotech/jellybeans.vim'
-Plug 'morhetz/gruvbox'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 " Tim Pope
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-surround'
 " Colorschemes
+Plug 'altercation/vim-colors-solarized'
+Plug 'nanotech/jellybeans.vim'
+Plug 'morhetz/gruvbox'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'logico/typewriter-vim'
 Plug 'ErichDonGubler/vim-sublime-monokai'
@@ -193,7 +197,7 @@ if has("mac")
 else
   set gfn=Monospace\ 12
   if !has('gui_running')
-    colorscheme default
+    colorscheme gruvbox
   else
     colorscheme jellybeans
   endif
@@ -327,17 +331,11 @@ let tlist_r_settings = 'Splus;r:object/function'
 "set foldnestmax=2
 "set fillchars=vert:\|,fold:\
 
-" CtrlP:
-map <Leader><space> :CtrlP<CR>
-map <Leader>, :CtrlPBuffer<CR>
-map <Leader>. :CtrlPTag<CR>
-map <Leader>\\ :CtrlPBufTag<CR>
-let g:ctrlp_match_window_bottom=0
-let g:ctrlp_match_window_reversed=0
-let g:ctrlp_mruf_last_entered=1
-let g:ctrlp_open_new_file = 'r'
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
-" let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir', 'rtscript']
+" Telescope:
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 " Define Function Quick-Fix-List-Do:
 fun! QFDo(bang, command) 
