@@ -27,6 +27,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-surround'
 " Colorschemes
 Plug 'altercation/vim-colors-solarized'
+Plug 'rebelot/kanagawa.nvim'
 Plug 'nanotech/jellybeans.vim'
 Plug 'morhetz/gruvbox'
 Plug 'NLKNguyen/papercolor-theme'
@@ -174,6 +175,11 @@ nnoremap <Leader>n :NERDTreeToggle<CR>
 " Close all Buffers except the current one:
 com! -nargs=0 BufOnly :%bd | e#
 
+" Jump to alternate buffer:
+nnoremap <Leader>, :b#<CR>
+
+" Shortcut to :only
+nnoremap <Leader>. :only<CR>
 
 " Formatting:
 map Q gq
