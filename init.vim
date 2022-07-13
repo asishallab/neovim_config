@@ -34,6 +34,7 @@ Plug 'NLKNguyen/papercolor-theme'
 Plug 'logico/typewriter-vim'
 Plug 'ErichDonGubler/vim-sublime-monokai'
 Plug 'nanotech/jellybeans.vim'
+Plug 'xiyaowong/nvim-transparent'
 " On-demand loading
 Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
