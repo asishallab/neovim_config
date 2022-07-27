@@ -5,24 +5,34 @@ set nocompatible " Vim not vi
 filetype off 
 
 " Vim-Plug
+" ========
 call plug#begin('~/.nvim/plugged')
+" Language server protocol:
 Plug 'neovim/nvim-lspconfig'
 Plug 'anott03/nvim-lspinstall'
+" Fuzzy finding:
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 " Plug 'kien/ctrlp.vim'
 " Plug 'cloudhead/neovim-fuzzy'
 " Plug 'sjl/gundo.vim'
+" Undo:
 Plug 'mbbill/undotree'
+" Enhanced syntax parsing:
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+" Clipboard:
 Plug 'maxbrunsfeld/vim-yankstack'
+" TMUX integration:
 Plug 'jpalardy/vim-slime'
+" GNU global and Ctags:
 Plug 'jsfaint/gen_tags.vim'
 Plug 'vim-scripts/taglist.vim'
+" Snippets:
 "Plug 'majutsushi/tagbar'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
-" Tim Pope
+" Tim Pope:
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-surround'
 " Colorschemes
@@ -35,11 +45,12 @@ Plug 'logico/typewriter-vim'
 Plug 'ErichDonGubler/vim-sublime-monokai'
 Plug 'nanotech/jellybeans.vim'
 Plug 'xiyaowong/nvim-transparent'
-" On-demand loading
+" On-demand loading - programming languages:
 Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'jalvesaq/Nvim-R', { 'for': 'r' }
 Plug 'derekwyatt/vim-scala', { 'for': 'scala' }
+" File Tree:
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 " Add plugins to &runtimepath
 call plug#end()
