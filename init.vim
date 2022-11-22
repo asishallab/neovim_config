@@ -135,10 +135,13 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
   buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+  buf_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.get()<CR>', opts)
   buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
   buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
   buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+  buf_set_keymap('n', 'gs', '<cmd>lua vim.lsp.buf.document_symbol()<CR>', opts)
+  buf_set_keymap('n', '<space>h', '<cmd>lua vim.lsp.buf.document_highlight()<CR>', opts)
+  
 
   -- Set some keybinds conditional on server capabilities
   if client.resolved_capabilities.document_formatting then
@@ -195,7 +198,7 @@ nnoremap <Leader>. :only<CR>
 
 " Formatting:
 map Q gq
-"Format a paragraph:
+" Format a paragraph:
 nnoremap <Leader>q :normal Qipg;g;<CR>
 "set textwidth=80
 
@@ -234,21 +237,14 @@ let g:slime_target = "tmux"
 let g:slime_paste_file = "$HOME/.slime_paste"
 let g:slime_default_config = {"socket_name": "default", "target_pane": "1.2"}
 
+" Format R files:
+command! FrmtR !R -e 'require(formatR); tidy_source("%", file="%", width.cutoff=45)'
+
 " Surround for eruby:
 " autocmd FileType eruby let b:surround_37 = "<% \r %>"
 " autocmd FileType eruby let b:surround_61 = "<%= \r %>"
 " autocmd FileType eruby let b:surround_35 = "#{ \r }"
 " autocmd FileType ruby let b:surround_35 = "#{ \r }"
-
-" Rust Language Server
-" if executable('rls')
-"     au User lsp_setup call lsp#register_server({
-"         \ 'name': 'rls',
-"         \ 'cmd': {server_info->['rustup', 'run', 'stable', 'rls']},
-"         \ 'workspace_config': {'rust': {'clippy_preference': 'on'}},
-"         \ 'whitelist': ['rust'],
-"         \ })
-" endif
 
 " Rust (rust.vim)
 let g:rustfmt_autosave = 1
@@ -256,19 +252,6 @@ let g:rustfmt_autosave = 1
 "" rust-analyzer-language-server
 "let g:ale_linters = {'rust': ['analyzer']}
 
-"" Rust (racer)
-"let g:racer_experimental_completer = 1
-"let g:racer_insert_paren = 1
-"augroup Racer
-   "autocmd!
-   "autocmd FileType rust nmap <buffer> gd         <Plug>(rust-def)
-   "autocmd FileType rust nmap <buffer> gs         <Plug>(rust-def-split)
-   "autocmd FileType rust nmap <buffer> gx         <Plug>(rust-def-vertical)
-   "autocmd FileType rust nmap <buffer> gt         <Plug>(rust-def-tab)
-   "autocmd FileType rust nmap <buffer> <leader>gd <Plug>(rust-doc)
-   "autocmd FileType rust nmap <buffer> <leader>gD <Plug>(rust-doc-tab)
-"augroup END
-"
 " Spellcheck:
 com Se set spell spelllang=en
 com Sd set spell spelllang=de
