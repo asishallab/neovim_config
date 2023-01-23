@@ -43,7 +43,6 @@ Plug 'morhetz/gruvbox'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'logico/typewriter-vim'
 Plug 'ErichDonGubler/vim-sublime-monokai'
-Plug 'nanotech/jellybeans.vim'
 Plug 'xiyaowong/nvim-transparent'
 " On-demand loading - programming languages:
 Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
