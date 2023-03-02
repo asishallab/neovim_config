@@ -110,10 +110,10 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 -- See `:help vim.o`
 
 -- Backup, Swap, and Undo directories
-vim.o.directory = '~/.nvim/tmp/swap'
-vim.o.backupdir = '~/.nvim/tmp/backup'
+vim.o.directory = vim.fn.expand('$HOME/.nvim/tmp/swap')
+vim.o.backupdir = vim.fn.expand('$HOME/.nvim/tmp/backup')
 vim.o.undofile = true
-vim.o.undodir = '~/.nvim/tmp/undo'
+vim.o.undodir = vim.fn.expand('$HOME/.nvim/tmp/undo')
 
 -- General settings
 vim.o.wildmenu = true
