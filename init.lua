@@ -433,6 +433,10 @@ cmp.setup {
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
+    -- for the next two lines see this post
+    -- https://www.reddit.com/r/neovim/comments/uehlkq/since_updating_to_07_i_can_no_longer_cycle
+    ['<C-n>'] = cmp.mapping(cmp.mapping.select_next_item(), {'i','c'}),
+    ['<C-p>'] = cmp.mapping(cmp.mapping.select_prev_item(), {'i','c'}),
     ['<CR>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
