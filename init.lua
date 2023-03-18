@@ -67,7 +67,7 @@ require('packer').startup(function(use)
 
   use { 'mbbill/undotree' } -- Undo
   use { 'maxbrunsfeld/vim-yankstack' } -- Yankstack
-  use { 'jpalardy/vim-slime' } -- Slime / tmux integration
+  use { 'jpalardy/vim-slime', branch = "main" } -- Slime / tmux integration
   use { 'jsfaint/gen_tags.vim' } -- Automated tag generation
   use { 'vim-scripts/taglist.vim' } -- Tag browser
   use { 'tpope/vim-unimpaired' } -- Tim Pope's helper functions
@@ -505,7 +505,7 @@ vim.cmd [[
 
   " vim-slime
   let g:slime_target = "tmux"
-  let g:slime_paste_file = "$HOME/.slime_paste"
+  "let g:slime_paste_file = "$HOME/.slime_paste"
   let g:slime_default_config = {"socket_name": "default", "target_pane": "1.2"}
 
   " Format R files:
