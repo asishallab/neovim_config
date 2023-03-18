@@ -110,10 +110,10 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 -- See `:help vim.o`
 
 -- Backup, Swap, and Undo directories
-vim.o.directory = '~/.nvim/tmp/swap'
-vim.o.backupdir = '~/.nvim/tmp/backup'
+vim.o.directory = vim.fn.expand('$HOME/.nvim/tmp/swap')
+vim.o.backupdir = vim.fn.expand('$HOME/.nvim/tmp/backup')
 vim.o.undofile = true
-vim.o.undodir = '~/.nvim/tmp/undo'
+vim.o.undodir = vim.fn.expand('$HOME/.nvim/tmp/undo')
 
 -- General settings
 vim.o.wildmenu = true
@@ -381,7 +381,7 @@ local servers = {
   -- rust_analyzer = {},
   -- tsserver = {},
 
-  sumneko_lua = {
+  lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
       telemetry = { enable = false },
@@ -438,6 +438,10 @@ cmp.setup {
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
+    -- for the next two lines see this post
+    -- https://www.reddit.com/r/neovim/comments/uehlkq/since_updating_to_07_i_can_no_longer_cycle
+    ['<C-n>'] = cmp.mapping(cmp.mapping.select_next_item(), {'i','c'}),
+    ['<C-p>'] = cmp.mapping(cmp.mapping.select_prev_item(), {'i','c'}),
     ['<CR>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
