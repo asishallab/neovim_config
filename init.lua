@@ -54,10 +54,10 @@ require('packer').startup(function(use)
   use 'morhetz/gruvbox'
   use 'altercation/vim-colors-solarized'
 
-  use 'nvim-lualine/lualine.nvim' -- Fancier statusline
+  use 'nvim-lualine/lualine.nvim'           -- Fancier statusline
   use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
-  use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
-  use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
+  use 'numToStr/Comment.nvim'               -- "gc" to comment visual regions/lines
+  use 'tpope/vim-sleuth'                    -- Detect tabstop and shiftwidth automatically
 
   -- Fuzzy Finder (files, lsp, etc)
   use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
@@ -65,14 +65,26 @@ require('packer').startup(function(use)
   -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
 
-  use { 'mbbill/undotree' } -- Undo
-  use { 'maxbrunsfeld/vim-yankstack' } -- Yankstack
+  use { 'mbbill/undotree' }                     -- Undo
+  use { 'maxbrunsfeld/vim-yankstack' }          -- Yankstack
   use { 'jpalardy/vim-slime', branch = "main" } -- Slime / tmux integration
-  use { 'jsfaint/gen_tags.vim' } -- Automated tag generation
-  use { 'vim-scripts/taglist.vim' } -- Tag browser
-  use { 'tpope/vim-unimpaired' } -- Tim Pope's helper functions
-  use { 'tpope/vim-surround' } -- Tim Pope's surround plugin
-  use { 'scrooloose/nerdtree' } -- File-Tree browser
+  use { 'jsfaint/gen_tags.vim' }                -- Automated tag generation
+  use { 'vim-scripts/taglist.vim' }             -- Tag browser
+  use { 'tpope/vim-unimpaired' }                -- Tim Pope's helper functions
+  use { 'tpope/vim-surround' }                  -- Tim Pope's surround plugin
+  use { 'scrooloose/nerdtree' }                 -- File-Tree browser
+  use {
+    "folke/which-key.nvim",
+    config = function()
+      vim.o.timeout = true
+      vim.o.timeoutlen = 300
+      require("which-key").setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
+    end
+  }
 
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
@@ -228,8 +240,8 @@ require('telescope').setup {
   defaults = {
     mappings = {
       i = {
-        ['<C-u>'] = false,
-        ['<C-d>'] = false,
+            ['<C-u>'] = false,
+            ['<C-d>'] = false,
       },
     },
   },
@@ -250,9 +262,10 @@ vim.keymap.set('n', '<leader>/', function()
 end, { desc = '[/] Fuzzily search in current buffer]' })
 
 vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
+vim.keymap.set('n', '<leader>sb', require('telescope.builtin').buffers, { desc = '[S]earch [B]uffers' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
-vim.keymap.set('n', '<leader>sb', require('telescope.builtin').live_grep, { desc = '[S]earch by grep in open [B]uffers' })
+vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by grep in open [B]uffers' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 
 -- [[ Configure Treesitter ]]
@@ -278,41 +291,41 @@ require('nvim-treesitter.configs').setup {
       lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
       keymaps = {
         -- You can use the capture groups defined in textobjects.scm
-        ['aa'] = '@parameter.outer',
-        ['ia'] = '@parameter.inner',
-        ['af'] = '@function.outer',
-        ['if'] = '@function.inner',
-        ['ac'] = '@class.outer',
-        ['ic'] = '@class.inner',
+            ['aa'] = '@parameter.outer',
+            ['ia'] = '@parameter.inner',
+            ['af'] = '@function.outer',
+            ['if'] = '@function.inner',
+            ['ac'] = '@class.outer',
+            ['ic'] = '@class.inner',
       },
     },
     move = {
       enable = true,
       set_jumps = true, -- whether to set jumps in the jumplist
       goto_next_start = {
-        [']m'] = '@function.outer',
-        [']]'] = '@class.outer',
+            [']m'] = '@function.outer',
+            [']]'] = '@class.outer',
       },
       goto_next_end = {
-        [']M'] = '@function.outer',
-        [']['] = '@class.outer',
+            [']M'] = '@function.outer',
+            [']['] = '@class.outer',
       },
       goto_previous_start = {
-        ['[m'] = '@function.outer',
-        ['[['] = '@class.outer',
+            ['[m'] = '@function.outer',
+            ['[['] = '@class.outer',
       },
       goto_previous_end = {
-        ['[M'] = '@function.outer',
-        ['[]'] = '@class.outer',
+            ['[M'] = '@function.outer',
+            ['[]'] = '@class.outer',
       },
     },
     swap = {
       enable = true,
       swap_next = {
-        ['<leader>a'] = '@parameter.inner',
+            ['<leader>a'] = '@parameter.inner',
       },
       swap_previous = {
-        ['<leader>A'] = '@parameter.inner',
+            ['<leader>A'] = '@parameter.inner',
       },
     },
   },
@@ -418,7 +431,7 @@ mason_lspconfig.setup_handlers {
 
 -- Configure language servers without mason, if needed:
 require 'lspconfig'.r_language_server.setup {
-      on_attach = on_attach
+  on_attach = on_attach
 }
 
 -- Turn on lsp status information
@@ -434,19 +447,22 @@ cmp.setup {
       luasnip.lsp_expand(args.body)
     end,
   },
+  completion = {
+    autocomplete = false
+  },
   mapping = cmp.mapping.preset.insert {
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
+        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    -- ['<C-Space>'] = cmp.mapping.complete(),
     -- for the next two lines see this post
     -- https://www.reddit.com/r/neovim/comments/uehlkq/since_updating_to_07_i_can_no_longer_cycle
-    ['<C-n>'] = cmp.mapping(cmp.mapping.select_next_item(), {'i','c'}),
-    ['<C-p>'] = cmp.mapping(cmp.mapping.select_prev_item(), {'i','c'}),
-    ['<CR>'] = cmp.mapping.confirm {
+        ['<C-n>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 'c' }),
+        ['<C-p>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 'c' }),
+        ['<CR>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     },
-    ['<Tab>'] = cmp.mapping(function(fallback)
+        ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
       elseif luasnip.expand_or_jumpable() then
@@ -455,7 +471,7 @@ cmp.setup {
         fallback()
       end
     end, { 'i', 's' }),
-    ['<S-Tab>'] = cmp.mapping(function(fallback)
+        ['<S-Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
       elseif luasnip.jumpable(-1) then
@@ -568,26 +584,26 @@ vim.cmd [[
   let tlist_r_settings = 'Splus;r:object/function'
 
   " Define Function Quick-Fix-List-Do:
-  fun! QFDo(bang, command) 
-       let qflist={} 
-       if a:bang 
-           let tlist=map(getloclist(0), 'get(v:val, ''bufnr'')') 
-       else 
-           let tlist=map(getqflist(), 'get(v:val, ''bufnr'')') 
-       endif 
-       if empty(tlist) 
-          echomsg "Empty Quickfixlist. Aborting" 
-          return 
-       endif 
-       for nr in tlist 
-       let item=fnameescape(bufname(nr)) 
-       if !get(qflist, item,0) 
-           let qflist[item]=1 
-       endif 
-       endfor 
-       :exe 'argl ' .join(keys(qflist)) 
-       :exe 'argdo ' . a:command 
-  endfunc 
+  fun! QFDo(bang, command)
+       let qflist={}
+       if a:bang
+           let tlist=map(getloclist(0), 'get(v:val, ''bufnr'')')
+       else
+           let tlist=map(getqflist(), 'get(v:val, ''bufnr'')')
+       endif
+       if empty(tlist)
+          echomsg "Empty Quickfixlist. Aborting"
+          return
+       endif
+       for nr in tlist
+       let item=fnameescape(bufname(nr))
+       if !get(qflist, item,0)
+           let qflist[item]=1
+       endif
+       endfor
+       :exe 'argl ' .join(keys(qflist))
+       :exe 'argdo ' . a:command
+  endfunc
   com! -nargs=1 -bang Qfdo :call QFDo(<bang>0,<q-args>)
 
   if !exists(":DiffOrig")
