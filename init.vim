@@ -26,8 +26,8 @@ Plug 'maxbrunsfeld/vim-yankstack'
 " TMUX integration:
 Plug 'jpalardy/vim-slime'
 " GNU global and Ctags:
-Plug 'jsfaint/gen_tags.vim'
-Plug 'vim-scripts/taglist.vim'
+" Plug 'jsfaint/gen_tags.vim'
+" Plug 'vim-scripts/taglist.vim'
 " Snippets:
 "Plug 'majutsushi/tagbar'
 Plug 'Shougo/neosnippet.vim'
