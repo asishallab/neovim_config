@@ -109,6 +109,7 @@ set cursorline
 "set autochdir " always switch to the current file directory
 set ignorecase
 set smartcase
+set completeopt=menu,menuone
 
 " Neovim LSP customizations; see:
 " https://github.com/neovim/nvim-lspconfig
@@ -141,12 +142,11 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', 'gs', '<cmd>lua vim.lsp.buf.document_symbol()<CR>', opts)
   buf_set_keymap('n', '<space>h', '<cmd>lua vim.lsp.buf.document_highlight()<CR>', opts)
   
-
   -- Set some keybinds conditional on server capabilities
   if client.resolved_capabilities.document_formatting then
-    buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+    buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.format()<CR>", opts)
   elseif client.resolved_capabilities.document_range_formatting then
-    buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
+    buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.range_format()<CR>", opts)
   end
 
   -- Set autocommands conditional on server_capabilities
@@ -166,7 +166,7 @@ end
 
 -- Use a loop to conveniently both setup defined servers 
 -- and map buffer local keybindings when the language server attaches
-local servers = { "pyright", "rust_analyzer", "tsserver" }
+local servers = { "pyright", "rust_analyzer", "tsserver", "r_language_server" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup { on_attach = on_attach }
 end
@@ -233,7 +233,7 @@ command! -nargs=* Wrap set wrap linebreak nolist
 
 " vim-slime
 let g:slime_target = "tmux"
-let g:slime_paste_file = "$HOME/.slime_paste"
+"let g:slime_paste_file = "$HOME/.slime_paste"
 let g:slime_default_config = {"socket_name": "default", "target_pane": "1.2"}
 
 " Format R files:
