@@ -30,8 +30,9 @@ Plug 'jpalardy/vim-slime'
 " Plug 'vim-scripts/taglist.vim'
 " Snippets:
 "Plug 'majutsushi/tagbar'
-Plug 'Shougo/neosnippet.vim'
-Plug 'Shougo/neosnippet-snippets'
+" Plug 'Shougo/neosnippet.vim'
+" Plug 'Shougo/neosnippet-snippets'
+Plug 'L3MON4D3/LuaSnip', { 'tag': 'v2.*' }
 " Tim Pope:
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-surround'
@@ -40,10 +41,16 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'rebelot/kanagawa.nvim'
 Plug 'nanotech/jellybeans.vim'
 Plug 'morhetz/gruvbox'
+Plug 'navarasu/onedark.nvim'
+Plug 'rebelot/kanagawa.nvim'
+Plug 'sainnhe/gruvbox-material'
+Plug 'luisiacc/gruvbox-baby'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'logico/typewriter-vim'
 Plug 'ErichDonGubler/vim-sublime-monokai'
 Plug 'xiyaowong/nvim-transparent'
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
+Plug 'Th3Whit3Wolf/space-nvim'
 " On-demand loading - programming languages:
 Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
@@ -116,7 +123,8 @@ set completeopt=menu,menuone
 lua << EOF
 -- Setup language servers.
 local lspconfig = require('lspconfig')
-lspconfig.pylsp.setup {}
+-- lspconfig.pylsp.setup {}
+lspconfig.pyright.setup {}
 lspconfig.tsserver.setup {}
 lspconfig.r_language_server.setup{}
 lspconfig.rust_analyzer.setup {
@@ -132,7 +140,7 @@ lspconfig.rust_analyzer.setup {
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
+vim.keymap.set('n', '<space>l', vim.diagnostic.setloclist)
 
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
@@ -172,10 +180,37 @@ let g:LanguageClient_serverCommands = {
 
 
 " Neosnippet
-imap <C-k> <Plug>(neosnippet_expand_or_jump)
-smap <C-k> <Plug>(neosnippet_expand_or_jump)
-xmap <C-k> <Plug>(neosnippet_expand_target)
-let g:neosnippet#snippets_directory = '~/.config/nvim/my_neosnippets'
+" imap <C-k> <Plug>(neosnippet_expand_or_jump)
+" smap <C-k> <Plug>(neosnippet_expand_or_jump)
+" xmap <C-k> <Plug>(neosnippet_expand_target)
+" let g:neosnippet#snippets_directory = '~/.config/nvim/my_neosnippets'
+
+" LuaSnip
+lua << EOF
+require("luasnip").config.set_config({ -- Setting LuaSnip config
+
+  -- Enable autotriggered snippets
+  enable_autosnippets = true,
+
+  -- Use Tab (or some other key if you prefer) to trigger visual selection
+  store_selection_keys = "<Tab>",
+})
+
+vim.cmd[[
+" Expand or jump in insert mode
+imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>' 
+
+" Jump forward through tabstops in visual mode
+smap <silent><expr> <Tab> luasnip#jumpable(1) ? '<Plug>luasnip-jump-next' : '<Tab>'
+
+" Jump backward through snippet tabstops with Shift-Tab (for example)
+imap <silent><expr> <S-Tab> luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '<S-Tab>'
+smap <silent><expr> <S-Tab> luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '<S-Tab>'
+]]
+
+-- Load all snippets from the nvim/LuaSnip directory at startup
+require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/LuaSnip/"})
+EOF
 
 " Toggle NERDTree:
 nnoremap <Leader>n :NERDTreeToggle<CR>
@@ -244,6 +279,9 @@ let g:rustfmt_autosave = 1
 
 "" rust-analyzer-language-server
 "let g:ale_linters = {'rust': ['analyzer']}
+
+" Python
+autocmd FileType python setlocal formatprg=black\ --quiet\ -
 
 " Spellcheck:
 com Se set spell spelllang=en
