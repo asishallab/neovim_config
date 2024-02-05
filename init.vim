@@ -33,6 +33,7 @@ Plug 'jpalardy/vim-slime'
 " Plug 'Shougo/neosnippet.vim'
 " Plug 'Shougo/neosnippet-snippets'
 Plug 'L3MON4D3/LuaSnip', { 'tag': 'v2.*' }
+Plug 'rafamadriz/friendly-snippets'
 " Tim Pope:
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-surround'
@@ -58,6 +59,8 @@ Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'derekwyatt/vim-scala', { 'for': 'scala' }
 " File Tree:
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+" Show all commands following a starting key:
+Plug 'folke/which-key.nvim'
 " Add plugins to &runtimepath
 call plug#end()
 
@@ -209,6 +212,7 @@ smap <silent><expr> <S-Tab> luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '
 ]]
 
 -- Load all snippets from the nvim/LuaSnip directory at startup
+require("luasnip.loaders.from_vscode").lazy_load()
 require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/LuaSnip/"})
 EOF
 
