@@ -213,8 +213,11 @@ smap <silent><expr> <S-Tab> luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '
 
 -- Load all snippets from the nvim/LuaSnip directory at startup
 require("luasnip.loaders.from_vscode").lazy_load()
-require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/LuaSnip/"})
+require("luasnip.loaders.from_lua").load({paths = "./LuaSnip"})
 EOF
+
+" which-key
+lua require("which-key").setup()
 
 " Toggle NERDTree:
 nnoremap <Leader>n :NERDTreeToggle<CR>
