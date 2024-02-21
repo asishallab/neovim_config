@@ -10,6 +10,7 @@ call plug#begin('~/.nvim/plugged')
 " Language server protocol:
 Plug 'neovim/nvim-lspconfig'
 Plug 'anott03/nvim-lspinstall'
+Plug 'dgagn/diagflow.nvim'
 " Fuzzy finding:
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'nvim-lua/plenary.nvim'
@@ -30,18 +31,17 @@ Plug 'jpalardy/vim-slime'
 " Plug 'vim-scripts/taglist.vim'
 " Snippets:
 "Plug 'majutsushi/tagbar'
-" Plug 'Shougo/neosnippet.vim'
-" Plug 'Shougo/neosnippet-snippets'
 Plug 'L3MON4D3/LuaSnip', { 'tag': 'v2.*' }
 Plug 'rafamadriz/friendly-snippets'
 " Tim Pope:
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-surround'
 " Colorschemes
+Plug 'Mofiqul/vscode.nvim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'rebelot/kanagawa.nvim'
 Plug 'nanotech/jellybeans.vim'
-Plug 'morhetz/gruvbox'
+Plug 'ellisonleao/gruvbox.nvim'
 Plug 'navarasu/onedark.nvim'
 Plug 'rebelot/kanagawa.nvim'
 Plug 'sainnhe/gruvbox-material'
@@ -181,12 +181,8 @@ let g:LanguageClient_serverCommands = {
       \ 'r': ['R', '--slave', '-e', 'languageserver::run()'],
       \ }
 
-
-" Neosnippet
-" imap <C-k> <Plug>(neosnippet_expand_or_jump)
-" smap <C-k> <Plug>(neosnippet_expand_or_jump)
-" xmap <C-k> <Plug>(neosnippet_expand_target)
-" let g:neosnippet#snippets_directory = '~/.config/nvim/my_neosnippets'
+" Make LSP information look nice like in the Helix editor:
+lua require('diagflow').setup()
 
 " LuaSnip
 lua << EOF
@@ -213,7 +209,7 @@ smap <silent><expr> <S-Tab> luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '
 
 -- Load all snippets from the nvim/LuaSnip directory at startup
 require("luasnip.loaders.from_vscode").lazy_load()
-require("luasnip.loaders.from_lua").load({paths = "./LuaSnip"})
+require("luasnip.loaders.from_vscode").lazy_load({paths = "./LuaSnip"})
 EOF
 
 " which-key

@@ -1,0 +1,6 @@
+{
+  "test": {
+    "prefix": "tst",
+    "body": "test ${0} ${1}"
+  }
+}
