@@ -15,9 +15,6 @@ Plug 'dgagn/diagflow.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
-" Plug 'kien/ctrlp.vim'
-" Plug 'cloudhead/neovim-fuzzy'
-" Plug 'sjl/gundo.vim'
 " Undo:
 Plug 'mbbill/undotree'
 " Enhanced syntax parsing:
@@ -228,7 +225,7 @@ nnoremap <Leader>, :b#<CR>
 nnoremap <Leader>. :only<CR>
 
 " Formatting:
-map Q gq
+map Q gw
 " Format a paragraph:
 nnoremap <Leader>q :normal Qipg;g;<CR>
 "set textwidth=80
