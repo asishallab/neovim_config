@@ -46,6 +46,7 @@ Plug 'luisiacc/gruvbox-baby'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'logico/typewriter-vim'
 Plug 'ErichDonGubler/vim-sublime-monokai'
+Plug 'loctvl842/monokai-pro.nvim'
 Plug 'xiyaowong/nvim-transparent'
 Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 Plug 'Th3Whit3Wolf/space-nvim'
@@ -241,14 +242,13 @@ inoremap <A-j> <esc>g<down>i
 "Colorscheme & Font:
 if has("mac")
   set gfn=Monaco:h13
-  colorscheme jellybeans
-  set background=dark
+  colorscheme monokai-pro
 else
   set gfn=Monospace\ 12
   if !has('gui_running')
-    colorscheme gruvbox
+    colorscheme monokai-pro
   else
-    colorscheme jellybeans
+    colorscheme monokai-pro
   endif
 endif
 
