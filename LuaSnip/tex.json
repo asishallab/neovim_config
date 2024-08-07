@@ -1,0 +1,22 @@
+{
+  "figure": {
+    "prefix": "fig",
+    "body": "\\begin{figure}[H]%
+\\begin{center}%
+\\includegraphics[width=\\textwidth]{${1:file}}%
+\\end{center}%
+\\caption{${2:caption}}%
+\\label{fig_${3:label}}%
+\\end{figure}%"
+  },
+  "enumerate": {
+    "prefix": "enum",
+    "body": "\\begin{enumerate}%
+  ${1}
+\\end{enumerate}%"
+  },
+  "item": {
+    "prefix": "itm",
+    "body": "\\item ${1}"
+  }
+}
