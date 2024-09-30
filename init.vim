@@ -126,7 +126,7 @@ lua << EOF
 local lspconfig = require('lspconfig')
 -- lspconfig.pylsp.setup {}
 lspconfig.pyright.setup {}
-lspconfig.tsserver.setup {}
+lspconfig.ts_ls.setup {}
 lspconfig.r_language_server.setup{}
 lspconfig.rust_analyzer.setup {
   -- Server-specific settings. See `:help lspconfig-setup`
