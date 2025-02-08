@@ -1,0 +1,13 @@
+{
+  "markdown-header": {
+    "prefix": "head",
+    "body": "---
+title: |
+    | ${1}
+author: ${2:Prof. Dr. Asis Hallab}
+date: ${3:\\today}
+geometry: margin=2.5cm
+numbersections: ${4:true}
+---"
+  }
+}

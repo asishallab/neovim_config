@@ -50,6 +50,8 @@ Plug 'loctvl842/monokai-pro.nvim'
 Plug 'xiyaowong/nvim-transparent'
 Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 Plug 'Th3Whit3Wolf/space-nvim'
+Plug 'tjdevries/colorbuddy.vim'
+Plug 'jzelinskie/monokai-soda.vim'
 " On-demand loading - programming languages:
 Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }

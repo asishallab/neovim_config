@@ -18,5 +18,20 @@
   "item": {
     "prefix": "itm",
     "body": "\\item ${1}"
+  },
+  "frame": {
+    "prefix": "frame",
+    "body": "\\begin{frame}%
+  \\frametitle{${1:title}}%
+\\end{frame}%"
+  },
+  "columns": {
+    "prefix": "cols",
+    "body": "\\begin{columns}
+  \\column{${1:0.5}\\textwidth}
+    ${3:col_1_content}
+  \\column{${2:0.5}\\textwidth}
+    ${4:col_1_content}
+\\end{columns}"
   }
 }
