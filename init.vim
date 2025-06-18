@@ -284,6 +284,7 @@ let g:rustfmt_autosave = 1
 
 " Python
 autocmd FileType python setlocal formatprg=black\ --quiet\ -
+autocmd FileType python setlocal slime_bracketed_paste=1
 
 " Spellcheck:
 com Se set spell spelllang=en
