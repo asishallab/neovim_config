@@ -129,6 +129,7 @@ local lspconfig = require('lspconfig')
 -- lspconfig.pylsp.setup {}
 lspconfig.pyright.setup {}
 lspconfig.ts_ls.setup {}
+lspconfig.fortls.setup {}
 lspconfig.r_language_server.setup{}
 lspconfig.rust_analyzer.setup {
   -- Server-specific settings. See `:help lspconfig-setup`
